@@ -3,3 +3,4 @@ python
 nltk
 ipython
 scikit-learn
+joblib
