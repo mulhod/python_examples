@@ -1,0 +1,10 @@
+[project]
+name = "firstmodel"
+version = "0.1.0"
+authors = [
+    {name = "Matt Mulholland", email = "mmulholland@ets.org"},
+]
+description = "Package for running content modeling experiments."
+
+[project.scripts]
+run_cs_experiment = "firstmodel.run_experiment:main"

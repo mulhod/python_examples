@@ -10,7 +10,7 @@ from sklearn.metrics import cohen_kappa_score
 from sklearn.svm import SVR
 from sklearn.feature_extraction import DictVectorizer
 
-from feature_extractor import extract_features
+from firstmodel.feature_extractor import extract_features
 
 
 def predict(text, model, vec):
