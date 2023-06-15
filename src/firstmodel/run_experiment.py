@@ -6,11 +6,13 @@ from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 import numpy as np
 import pandas as pd
 from scipy.stats import pearsonr
-from sklearn.metrics import cohen_kappa_score
+from sklearn.metrics import make_scorer
+from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVR
 from sklearn.feature_extraction import DictVectorizer
 
 from firstmodel.feature_extractor import extract_features
+from firstmodel.metrics import kappa
 
 
 def predict(text, model, vec):
@@ -79,7 +81,13 @@ def main():
     y_test = df_test["score"].values
 
     # Train model
-    model = SVR(gamma="scale", C=0.01, kernel="linear")
+    model = GridSearchCV(
+        SVR(cache_size=1000, gamma="scale"),
+        param_grid=[{"C": [0.01, 0.1, 1.0, 10.0, 100.0]}],
+        scoring=make_scorer(kappa, weights="quadratic"),
+        cv=3,
+        n_jobs=-1,
+    )
     model.fit(X_train, y_train)
 
     # Save the model
@@ -91,7 +99,7 @@ def main():
         print("Pearson's r: " + str(pearsonr(model.predict(X_test), y_test)), file=report_file)
         print(
             "Quadratic weighted kappa: " +
-            str(cohen_kappa_score(np.rint(model.predict(X_test)), y_test, weights="quadratic")),
+            str(kappa(model.predict(X_test), y_test, weights="quadratic")),
             file=report_file,
         )
 
