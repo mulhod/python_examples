@@ -3,6 +3,7 @@
 - How to set up Conda environment:
 ```bash
 mamba create -p ./myenv --file requirements.txt -y
+./myenv/bin/pip install -e .
 ```
 
 - How to run `run_experiment.py`:
