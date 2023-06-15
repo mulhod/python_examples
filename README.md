@@ -6,7 +6,8 @@ mamba create -p ./myenv --file requirements.txt -y
 ./myenv/bin/pip install -e .
 ```
 
-- How to run `run_experiment.py`:
+- How to run experiments:
 ```bash
-myenv/bin/python run_experiment.py --input_file_name Fruitfly.tsv --train_sample_size 0.8 --output_dir 2
+export PATH=$PWD/myenv/bin:$PATH
+run_cs_experiment --input_file_name Fruitfly.tsv --train_sample_size 0.8 --output_dir 2
 ```
