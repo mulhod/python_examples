@@ -5,12 +5,7 @@ from firstmodel import version
 from firstmodel.models import TextRequest
 from firstmodel.run_experiment import predict
 
-app: FastAPI = FastAPI(
-    title="MyAPI",
-    version=version,
-    docs_url=None,
-    redoc_url=None,
-)
+app: FastAPI = FastAPI(title="MyAPI", version=version)
 
 
 @app.get("/info")
