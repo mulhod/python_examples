@@ -1,4 +1,4 @@
-# APLN590
+# APLN540
 
 - How to set up Conda environment:
 ```bash
